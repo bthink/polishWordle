@@ -10,7 +10,7 @@ interface Props {
 }
 
 const GameBoard = ({ gameState, onInvalidWord }: Props) => {
-  const rows = Array(5).fill(null)
+  const rows = Array(6).fill(null)
 
   const getTileStatus = (rowIndex: number, colIndex: number): string => {
     if (rowIndex >= gameState.guesses.length) return ''
