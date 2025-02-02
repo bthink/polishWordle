@@ -63,7 +63,7 @@ const App = () => {
     if (key === 'ENTER') {
       if (gameState.currentGuess.length !== 5) return
       
-      const guessResult = Array(5).fill(false)
+      const guessResult = Array(6).fill(false)
       
       for (let i = 0; i < 5; i++) {
         if (gameState.currentGuess[i] === gameState.word[i]) {
