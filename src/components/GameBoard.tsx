@@ -6,7 +6,7 @@ interface Props {
 }
 
 const GameBoard = ({ gameState }: Props) => {
-  const rows = Array(6).fill(null)
+  const rows = Array(5).fill(null)
 
   return (
     <div className="game-board">
@@ -18,7 +18,12 @@ const GameBoard = ({ gameState }: Props) => {
             
             if (rowIndex < gameState.guesses.length) {
               letter = gameState.guesses[rowIndex][colIndex]
-              status = gameState.history[rowIndex][colIndex] ? 'correct' : 'incorrect'
+              if (gameState.history && gameState.history[rowIndex]) {
+                status = gameState.history[rowIndex][colIndex] ? 'correct' : 'incorrect'
+              } else {
+                console.warn('Game state history is not defined or rowIndex is out of bounds')
+                status = 'unknown'
+              }
             } else if (rowIndex === gameState.guesses.length) {
               letter = gameState.currentGuess[colIndex] || ''
             }

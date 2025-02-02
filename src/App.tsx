@@ -4,6 +4,7 @@ import { fetchWord } from './api'
 import GameBoard from './components/GameBoard'
 import Keyboard from './components/Keyboard'
 import './App.css'
+import { storage } from './utils/storage'
 
 const App = () => {
   const [gameState, setGameState] = useState<GameState>({
@@ -15,11 +16,44 @@ const App = () => {
   })
 
   useEffect(() => {
-    const initGame = async () => {
-      const word = await fetchWord()
-      setGameState(prev => ({ ...prev, word }))
+    const initializeGame = async () => {
+      const lastPlayedDate = storage.getLastPlayedDate()
+      const today = new Date().toDateString()
+      
+      if (lastPlayedDate !== today) {
+        const newWord = await fetchWord()
+        storage.saveDailyWord(newWord)
+        storage.saveDailyGuesses([])
+        setGameState(prev => ({ 
+          ...prev, 
+          word: newWord,
+          guesses: [],
+          history: []
+        }))
+      } else {
+        const savedWord = storage.getDailyWord()
+        const savedGuesses = storage.getDailyGuesses()
+        
+        if (savedWord) {
+          const history = savedGuesses.map(guess => 
+            guess.split('').map((letter, i) => letter === savedWord[i])
+          )
+          
+          setGameState(prev => ({ 
+            ...prev, 
+            word: savedWord,
+            guesses: savedGuesses,
+            history
+          }))
+        } else {
+          const newWord = await fetchWord()
+          storage.saveDailyWord(newWord)
+          setGameState(prev => ({ ...prev, word: newWord }))
+        }
+      }
     }
-    initGame()
+
+    initializeGame()
   }, [])
 
   const handleKeyPress = (key: string) => {
@@ -36,13 +70,18 @@ const App = () => {
         }
       }
       
+      const newGuesses = [...gameState.guesses, gameState.currentGuess]
+      const newHistory = [...gameState.history, guessResult]
+      
       setGameState(prev => ({
         ...prev,
-        guesses: [...prev.guesses, prev.currentGuess],
-        history: [...prev.history, guessResult],
+        guesses: newGuesses,
+        history: newHistory,
         currentGuess: '',
-        gameOver: guessResult.every(x => x) || prev.guesses.length === 5
+        gameOver: guessResult.every(x => x) || newGuesses.length === 5
       }))
+      
+      storage.saveDailyGuesses(newGuesses)
     } else if (key === 'BACKSPACE') {
       setGameState(prev => ({
         ...prev,
