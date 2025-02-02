@@ -1,4 +1,4 @@
-import { polishWords } from './words_array'
+import { polishWords } from '../assets/words_array'
       
 export const getRandomWord = (): string => {
   const randomIndex = Math.floor(Math.random() * polishWords.length)

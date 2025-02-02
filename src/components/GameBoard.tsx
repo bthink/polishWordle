@@ -1,5 +1,5 @@
 import { GameState } from '../types'
-import { polishWords } from '../utils/words_array'
+import { polishWords } from '../assets/words_array'
 import './GameBoard.css'
 import { useEffect } from 'react'
 
