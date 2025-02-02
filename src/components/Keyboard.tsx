@@ -11,13 +11,14 @@ interface Props {
 const Keyboard = ({ onKeyPress, guesses, word }: Props) => {
   const [keys, setKeys] = useState<KeyboardKey[]>([])
   const rows = [
+    'ĄĆĘŁŃÓŚŹŻ'.split(''),
     'QWERTYUIOP'.split(''),
     'ASDFGHJKL'.split(''),
     ['ENTER', ...'ZXCVBNM'.split(''), 'BACKSPACE']
   ]
 
   useEffect(() => {
-    const newKeys: KeyboardKey[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(key => ({
+    const newKeys: KeyboardKey[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZĄĆĘŁŃÓŚŹŻ'.split('').map(key => ({
       key,
       state: 'unused'
     }))
