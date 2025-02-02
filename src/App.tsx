@@ -59,6 +59,7 @@ const App = () => {
   return (
     <div className="app">
       <h1>Wordly</h1>
+      <h2>Ale czekamy na API od Piotra, więc na razie jest po angielsku</h2>
       <GameBoard gameState={gameState} />
       <Keyboard 
         onKeyPress={handleKeyPress}
