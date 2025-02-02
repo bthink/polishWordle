@@ -8,6 +8,15 @@ interface Props {
 const GameBoard = ({ gameState }: Props) => {
   const rows = Array(5).fill(null)
 
+  const getTileStatus = (rowIndex: number, colIndex: number): string => {
+    if (rowIndex >= gameState.guesses.length) return ''
+    
+    const letter = gameState.guesses[rowIndex][colIndex]
+    if (letter === gameState.word[colIndex]) return 'correct'
+    if (gameState.word.includes(letter)) return 'present'
+    return 'absent'
+  }
+
   return (
     <div className="game-board">
       {rows.map((_, rowIndex) => (
@@ -18,12 +27,7 @@ const GameBoard = ({ gameState }: Props) => {
             
             if (rowIndex < gameState.guesses.length) {
               letter = gameState.guesses[rowIndex][colIndex]
-              if (gameState.history && gameState.history[rowIndex]) {
-                status = gameState.history[rowIndex][colIndex] ? 'correct' : 'incorrect'
-              } else {
-                console.warn('Game state history is not defined or rowIndex is out of bounds')
-                status = 'unknown'
-              }
+              status = getTileStatus(rowIndex, colIndex)
             } else if (rowIndex === gameState.guesses.length) {
               letter = gameState.currentGuess[colIndex] || ''
             }

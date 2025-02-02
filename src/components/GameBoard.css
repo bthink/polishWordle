@@ -14,6 +14,7 @@
   width: 62px;
   height: 62px;
   border: 2px solid #3a3a3c;
+  margin: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +28,12 @@
   border-color: #538d4e;
 }
 
-.tile.incorrect {
+.tile.present {
+  background-color: #b59f3b;
+  border-color: #b59f3b;
+}
+
+.tile.absent {
   background-color: #3a3a3c;
   border-color: #3a3a3c;
 }
