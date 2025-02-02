@@ -1,11 +1,15 @@
 import { GameState } from '../types'
+import { polishWords } from '../utils/words_array'
 import './GameBoard.css'
+import { useEffect } from 'react'
+
 
 interface Props {
   gameState: GameState
+  onInvalidWord?: () => void
 }
 
-const GameBoard = ({ gameState }: Props) => {
+const GameBoard = ({ gameState, onInvalidWord }: Props) => {
   const rows = Array(5).fill(null)
 
   const getTileStatus = (rowIndex: number, colIndex: number): string => {
@@ -17,6 +21,19 @@ const GameBoard = ({ gameState }: Props) => {
     return 'absent'
   }
 
+  const isValidWord = (word: string): boolean => {
+    return polishWords.includes(word)
+  }
+
+  useEffect(() => {
+    if (gameState.guesses.length > 0) {
+      const lastGuess = gameState.guesses[gameState.guesses.length - 1].toLowerCase()
+      if (!isValidWord(lastGuess)) {
+        onInvalidWord?.()
+      }
+    }
+  }, [gameState.guesses])
+
   return (
     <div className="game-board">
       {rows.map((_, rowIndex) => (
@@ -26,8 +43,13 @@ const GameBoard = ({ gameState }: Props) => {
             let status = ''
             
             if (rowIndex < gameState.guesses.length) {
-              letter = gameState.guesses[rowIndex][colIndex]
-              status = getTileStatus(rowIndex, colIndex)
+              const currentGuess = gameState.guesses[rowIndex].toLowerCase() 
+              if (!isValidWord(currentGuess)) {
+                letter = ''
+              } else {
+                letter = gameState.guesses[rowIndex][colIndex]
+                status = getTileStatus(rowIndex, colIndex)
+              }
             } else if (rowIndex === gameState.guesses.length) {
               letter = gameState.currentGuess[colIndex] || ''
             }

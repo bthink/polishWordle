@@ -96,11 +96,20 @@ const App = () => {
     }
   }
 
+  const handleInvalidWord = () => {
+    setGameState(prev => ({
+      ...prev,
+      guesses: prev.guesses.slice(0, -1),  // Remove last guess
+      history: prev.history.slice(0, -1)    // Remove last history entry
+    }))
+    storage.saveDailyGuesses(gameState.guesses.slice(0, -1))
+  }
+
   return (
     <div className="app">
       <h1>Wordly</h1>
       <h2>Ale czekamy na API od Piotra, więc na razie jest losowanko własnych słów ze słownika SJP</h2>
-      <GameBoard gameState={gameState} />
+      <GameBoard gameState={gameState} onInvalidWord={handleInvalidWord} />
       <Keyboard 
         onKeyPress={handleKeyPress}
         guesses={gameState.guesses}
