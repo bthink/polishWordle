@@ -63,7 +63,7 @@ const App = () => {
     if (key === 'ENTER') {
       if (gameState.currentGuess.length !== 5) return
       
-      const guessResult = Array(6).fill(false)
+      const guessResult = Array(5).fill(false)
       
       for (let i = 0; i < 5; i++) {
         if (gameState.currentGuess[i] === gameState.word[i]) {
@@ -79,7 +79,7 @@ const App = () => {
         guesses: newGuesses,
         history: newHistory,
         currentGuess: '',
-        gameOver: guessResult.every(x => x) || newGuesses.length === 5
+        gameOver: guessResult.every(x => x) || newGuesses.length === 6
       }))
       
       storage.saveDailyGuesses(newGuesses)
@@ -113,6 +113,7 @@ const App = () => {
       {gameState.gameOver && !gameState.history[gameState.history.length - 1]?.every(x => x) && (
         <div className="game-over">
           Prawidłowe słowo: <strong>{gameState.word}</strong> (nie ja to wymyśliłem)
+        <p><a href={`https://sjp.pl/${gameState.word}`} target="_blank" rel="noopener noreferrer">Zobacz w SJP</a></p>
         </div>
       )}
       <Keyboard 
