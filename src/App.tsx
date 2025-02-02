@@ -28,7 +28,6 @@ const App = () => {
     if (key === 'ENTER') {
       if (gameState.currentGuess.length !== 5) return
       
-      const newHistory = [...gameState.history]
       const guessResult = Array(5).fill(false)
       
       for (let i = 0; i < 5; i++) {
