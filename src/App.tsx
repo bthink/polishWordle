@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { GameState } from './types'
-import { fetchWord } from './api'
+// import { fetchWord } from './api'
 import GameBoard from './components/GameBoard'
 import Keyboard from './components/Keyboard'
 import './App.css'
 import { storage } from './utils/storage'
+import { getRandomWord } from './utils/words'
 
 const App = () => {
   const [gameState, setGameState] = useState<GameState>({
@@ -21,7 +22,7 @@ const App = () => {
       const today = new Date().toDateString()
       
       if (lastPlayedDate !== today) {
-        const newWord = await fetchWord()
+        const newWord = getRandomWord()
         storage.saveDailyWord(newWord)
         storage.saveDailyGuesses([])
         setGameState(prev => ({ 
@@ -46,7 +47,7 @@ const App = () => {
             history
           }))
         } else {
-          const newWord = await fetchWord()
+          const newWord = getRandomWord()
           storage.saveDailyWord(newWord)
           setGameState(prev => ({ ...prev, word: newWord }))
         }
@@ -98,7 +99,7 @@ const App = () => {
   return (
     <div className="app">
       <h1>Wordly</h1>
-      <h2>Ale czekamy na API od Piotra, więc na razie jest po angielsku</h2>
+      <h2>Ale czekamy na API od Piotra, więc na razie jest losowanko własnych słów ze słownika SJP</h2>
       <GameBoard gameState={gameState} />
       <Keyboard 
         onKeyPress={handleKeyPress}
