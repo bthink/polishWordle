@@ -1,0 +1,47 @@
+.keyboard {
+  width: 100%;
+  max-width: 500px;
+  margin-top: auto;
+}
+
+.keyboard .row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.key {
+  height: 58px;
+  border-radius: 4px;
+  border: none;
+  background-color: #818384;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  flex: 1;
+  min-width: 40px;
+}
+
+.key.wide {
+  flex: 1.5;
+}
+
+.key.correct {
+  background-color: #538d4e;
+}
+
+.key.present {
+  background-color: #b59f3b;
+}
+
+.key.absent {
+  background-color: #3a3a3c;
+}
+
+@media (max-width: 500px) {
+  .key {
+    height: 48px;
+    font-size: 0.8rem;
+  }
+} 
