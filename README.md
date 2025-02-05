@@ -1,7 +1,3 @@
-
-
-Here's a comprehensive README.md for your Polish Wordle project:
-
 ```markdown:README.md
 # Wordle po Polsku 🇵🇱
 
