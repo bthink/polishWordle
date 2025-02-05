@@ -1,50 +1,72 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Here's a comprehensive README.md for your Polish Wordle project:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```markdown:README.md
+# Wordle po Polsku 🇵🇱
 
-## Expanding the ESLint configuration
+A Polish version of the popular word game Wordle, using words from SJP (Słownik Języka Polskiego).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- Daily word puzzle in Polish
+- Support for Polish characters (ą, ć, ę, ł, ń, ó, ś, ź, ż)
+- Word validation against Polish dictionary
+- Local storage for game progress
+- Mobile-responsive design
+- Color-coded feedback for guesses
+- Link to SJP dictionary for word definitions
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Tech Stack
+
+- React + TypeScript
+- Vite
+- Firebase Hosting
+- Local Storage for game state
+- CSS for styling
+
+## Development
+
+1. Install dependencies:
+```bash
+bun install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Run development server:
+```bash
+bun dev
 ```
+
+3. Build for production:
+```bash
+bun run build
+```
+
+## Word Processing Scripts
+
+The project includes several utility scripts for word processing:
+
+- `countWordsFromFile.js` - Count words in text file
+- `splitWordsByLetter.js` - Split words by first letter
+- `sendWordsToChatGPT.js` - Process words through ChatGPT
+- `findCommonWords.js` - Find common words between sources
+- `createCommonWordsArray.js` - Generate TypeScript array from word list
+
+## Deployment
+
+The game is deployed on Firebase Hosting. To deploy:
+
+```bash
+firebase deploy
+```
+
+## License
+
+MIT
+
+## Credits
+
+- Original Wordle game by Josh Wardle
+- Polish word list based on SJP
+```
+
