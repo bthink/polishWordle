@@ -107,8 +107,8 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Wordly 😅</h1>
-      <h2>Nie ma API od Piotra, więc na razie jest losowanko własnych słów ze słownika SJP</h2>
+      <h1>Wordly, ale w Polsce 🇵🇱</h1>
+      <h2>Głównie na bazie słownika SJP</h2>
       <GameBoard gameState={gameState} onInvalidWord={handleInvalidWord} />
       {gameState.gameOver && !gameState.history[gameState.history.length - 1]?.every(x => x) && (
         <div className="game-over">
