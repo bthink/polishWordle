@@ -110,10 +110,14 @@ const App = () => {
       <h1>Wordle, ale w Polsce 🇵🇱</h1>
       <h2>Głównie na bazie słownika SJP</h2>
       <GameBoard gameState={gameState} onInvalidWord={handleInvalidWord} />
-      {gameState.gameOver && !gameState.history[gameState.history.length - 1]?.every(x => x) && (
+      {gameState.gameOver && (
         <div className="game-over">
-          Prawidłowe słowo: <strong>{gameState.word}</strong> (nie ja to wymyśliłem)
-        <p><a href={`https://sjp.pl/${gameState.word}`} target="_blank" rel="noopener noreferrer">Zobacz w SJP</a></p>
+          {gameState.history[gameState.history.length - 1]?.every(x => x) ? (
+            <p>Gratulacje! Znalazłeś słowo: <strong>{gameState.word}</strong></p>
+          ) : (
+            <p>Prawidłowe słowo: <strong>{gameState.word}</strong> (nie ja to wymyśliłem)</p>
+          )}
+          <p><a href={`https://sjp.pl/${gameState.word}`} target="_blank" rel="noopener noreferrer">Zobacz w SJP</a></p>
         </div>
       )}
       <Keyboard 
