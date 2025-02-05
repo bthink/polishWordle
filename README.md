@@ -1,5 +1,5 @@
 ```markdown:README.md
-# Wordle po Polsku 🇵🇱
+# Polish Wordle 🇵🇱
 
 A Polish version of the popular word game Wordle, using words from SJP (Słownik Języka Polskiego).
 
