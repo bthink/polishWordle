@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GameState } from './types'
 // import { fetchWord } from './api'
 import GameBoard from './components/GameBoard'
