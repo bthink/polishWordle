@@ -6,6 +6,7 @@ import Keyboard from './components/Keyboard'
 import './App.css'
 import { storage } from './utils/storage'
 import { getRandomWord } from './utils/words'
+import SplitText from './components/Animations/SplitText/SplitText'
 
 const App = () => {
   const [gameState, setGameState] = useState<GameState>({
