@@ -1,5 +1,5 @@
 import { GameState } from '../types'
-import { commonWords } from '../assets/common_words_array.ts'
+import { existingPolishWords } from '../assets/existing_polish_words.ts'
 import './GameBoard.css'
 import { useEffect } from 'react'
 
@@ -22,7 +22,7 @@ const GameBoard = ({ gameState, onInvalidWord }: Props) => {
   }
 
   const isValidWord = (word: string): boolean => {
-    return commonWords.includes(word)
+    return existingPolishWords.includes(word)
   }
 
   useEffect(() => {
