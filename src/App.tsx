@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { GameState } from './types'
 // import { fetchWord } from './api'
 import GameBoard from './components/GameBoard'
@@ -105,10 +105,27 @@ const App = () => {
     storage.saveDailyGuesses(gameState.guesses.slice(0, -1))
   }
 
+  const handleNewGame = () =>   {
+    localStorage.clear()  
+    setGameState({
+      currentGuess: '',
+      guesses: [],
+      history: [],
+      gameOver: false,
+      word: ''
+    })
+    const newWord = getRandomWord()
+          storage.saveDailyWord(newWord)
+          setGameState(prev => ({ ...prev, word: newWord }))
+  }
+    
+
+
   return (
     <div className="app">
       <h1>Wordle, ale w Polsce 🇵🇱</h1>
       <h2>Głównie na bazie słownika SJP</h2>
+      <button className="button" onClick={handleNewGame}>Nowa gra</button>
       <GameBoard gameState={gameState} onInvalidWord={handleInvalidWord} />
       {gameState.gameOver && (
         <div className="game-over">

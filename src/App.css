@@ -37,6 +37,28 @@ h2 {
   margin-bottom: 2rem;
   font-size: 1rem;
 }
+.button {
+  padding: 12px 24px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  background-color: #818384;
+  color: white;
+}
+
+.button:hover {
+  background-color: #616364;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
+} 
 
 .game-over {
   text-align: center;
